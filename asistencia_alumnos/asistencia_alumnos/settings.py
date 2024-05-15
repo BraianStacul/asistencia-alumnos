@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     #'materias',
     #'asistencias'
     'apps.usuarios',
+    'apps.clases'
 ]
 
 AUTH_USER_MODEL = "usuarios.Usuario"
