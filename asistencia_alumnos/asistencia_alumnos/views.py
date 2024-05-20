@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as login_django
 
 from apps.usuarios.models import Usuario
+from apps.usuarios.forms import FormularioRegistro, FormularioRegistroUsuario
 
 def login(request):
 
@@ -36,4 +37,46 @@ def home(request):
 
     }
 
+    return render(request, template_name, ctx)
+
+def registrarme(request):
+    
+    template_name = 'registrarme.html'
+
+    form = FormularioRegistroUsuario()
+
+    usuario_todo_bien = None
+    
+    if request.method == "POST":
+        form = FormularioRegistroUsuario(request.POST)
+        # Guarduar el usuario
+        # username = request.POST.get('username')
+        # last_name = request.POST.get('last_name')
+        # first_name = request.POST.get('first_name')
+        # password = request.POST.get('password')   
+        
+        if form.is_valid():
+            form.save()
+            usuario_todo_bien = "Usuario creado correctamente, puede iniciar sesion."
+        else:
+            print("ERRORES: ", form.errors)
+
+        print("is_valid()----->",form.is_valid())
+
+        '''
+        u = Usuario(
+            username=username,
+            last_name=last_name,
+            first_name=first_name,
+            password=password
+        )
+
+        u.save()
+        '''
+    
+    ctx = {
+        'form' : form,
+        "usuario_todo_bien" : usuario_todo_bien
+    }
+    
     return render(request, template_name, ctx)

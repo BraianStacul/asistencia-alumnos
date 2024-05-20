@@ -25,10 +25,17 @@
 
     <ul class="nav flex-column mb-auto">
         <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2"
+                href="{% url 'clases:listar_clases' %}">
+                REGISTRARME
+            </a>
+        </li>
+        <li class="nav-item">
 
             {% if user.is_authenticated %}
 
-            <a class="nav-link d-flex align-items-center gap-2" href="{% url 'iniciar_sesion' %}">
+            <!-- Tercero -->
+            <a class="nav-link d-flex align-items-center gap-2" href="{% url 'registrarme' %}">
                 
                 SALIR
             </a>
