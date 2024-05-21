@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-
+from django.views.generic.list import ListView
 from apps.usuarios.models import Usuario
 
 def listar_usuarios(request):
@@ -20,3 +20,8 @@ def listar_usuarios(request):
     }
 
     return render(request, template_name, ctx)
+
+class ListarUsuarios(ListView):
+    template_name = 'usuarios/listar_todos.html'
+    model = Usuario
+    context_object_name = 'usuarios'
