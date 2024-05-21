@@ -5,5 +5,30 @@
     <h1 class="h2">LISTA DE CLASES</h1>
 </div>
 
+<div class="row">
+    <div class="col">
+        <button type="button" class="btn btn-primary">Nueva clase</button>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Cantidad de Alumnos</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for clase in clases %}
+
+                <tr>
+                    <td>{{clase.fecha}}</td>
+                    <td>@mdo</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {% endblock contenido %}
