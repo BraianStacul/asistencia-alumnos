@@ -11,8 +11,10 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Cantidad de Alumnos</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,8 +22,12 @@
                 {% for clase in clases %}
 
                 <tr>
+                    <td>{{clase.pk}}</td>
                     <td>{{clase.fecha}}</td>
                     <td>@mdo</td>
+                    <td>
+                        <a href="{% url 'clases:editar' clase.pk %}" class="btn btn-primary btn-sm">EDITAR</a>
+                    </td>
                 </tr>
 
                 {% endfor %}

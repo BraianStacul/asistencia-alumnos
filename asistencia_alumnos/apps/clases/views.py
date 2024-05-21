@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 
 from .forms import ClaseForm
@@ -18,6 +18,12 @@ def listar_clases(request):
 
 class CrearClase(CreateView):
     template_name = "clases/crear.html"
+    model = Clase
+    form_class = ClaseForm
+    success_url = reverse_lazy("clases:listar_clases")
+
+class EditarClase(UpdateView):
+    template_name = "clases/editar.html"
     model = Clase
     form_class = ClaseForm
     success_url = reverse_lazy("clases:listar_clases")
