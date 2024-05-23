@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 
 # Create your views here.
@@ -6,7 +8,7 @@ from apps.usuarios.models import Usuario
 
 def listar_usuarios(request):
     template_name = 'usuarios/listar_todos.html'
-    lista_usuarios = Usuario.objects.all() # filter(is_superuser = True)
+    lista_usuarios = Usuario.objects.all().order_by('id') # filter(is_superuser = True)
 
     # print("---->", lista_usuarios)
     # print("iterando usuarios")
@@ -16,6 +18,7 @@ def listar_usuarios(request):
 
     ctx = {
         'usuarios' : lista_usuarios,
+        'icono' : "o"
         # 'fecha_hora' : '29/04/2024 15:28 hs'
     }
 
@@ -25,3 +28,13 @@ class ListarUsuarios(ListView):
     template_name = 'usuarios/listar_todos.html'
     model = Usuario
     context_object_name = 'usuarios'
+    #Paginación
+    paginate_by = 2
+
+    def get_context_data(self, **kwargs):
+        ctx = super(ListarUsuarios, self).get_context_data(**kwargs)
+        ctx["icono"] = "o"
+        return ctx
+    
+    def get_queryset(self):
+        return self.model.objects.all().order_by('id')

@@ -19,7 +19,7 @@
             </thead>
             <tbody>
 
-                {% for clase in clases %}
+                {% for clase in clases %} <!-- clases -> object_list -> context_object_name = 'clases' -->
 
                 <tr>
                     <td>{{clase.pk}}</td>
@@ -34,6 +34,9 @@
 
             </tbody>
         </table>
+
+        {% include 'base/paginacion.html' %}
+        
     </div>
 </div>
 

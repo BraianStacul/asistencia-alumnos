@@ -2,12 +2,13 @@
 
 {% block contenido %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">LISTA DE USUARIOS</h1>
+    <h1 class="h2"> {{icono}} LISTA DE USUARIOS</h1>
 </div>
 
 <div class="row">
     <div class="col">
-        <a href="{% url 'clases:crear' %}" type="button" class="btn btn-primary">Nuevo Usuario</a href="{% url 'clases:crear' %}">
+        <a href="{% url 'clases:crear' %}" type="button" class="btn btn-primary">Nuevo Usuario</a
+            href="{% url 'clases:crear' %}">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -31,15 +32,20 @@
                         <a href="" class="btn btn-primary btn-sm">EDITAR</a>
                     </td>
                 </tr>
-                
+
                 {% empty %}
                 <tr>
-                    <td colspan="5"><h5>No existen registros.</h5></td>
+                    <td colspan="5">
+                        <h5>No existen registros.</h5>
+                    </td>
                 </tr>
                 {% endfor %}
 
             </tbody>
         </table>
+
+        {% include 'base/paginacion.html' %}
+        
     </div>
 </div>
 {% endblock contenido %}
