@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Marcar asistencia para {{clase.fecha}} </h1>
+</div>
+
+<div class="row">
+    <div class="col">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for u in usuarios %} <!-- clases -> object_list -> context_object_name = 'clases' -->
+
+                <tr>
+                    <td>{{u.last_name}}</td>
+                    <td>{{u.first_name}}</td>
+                    <td>
+                        
+                        {% if u.id in presentes %}
+                            <button type="button" class="btn btn-danger btn-sm">Quitar Presente</button>
+                        {% else %}
+                            <a href="{% url 'asistencias:crear_asistencia' clase.id u.id %}" class="btn btn-success btn-sm">Marcar Presente</a>
+                        {% endif %}
+                            
+                        
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock contenido %}

@@ -11,9 +11,8 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Fecha</th>
-                    <th scope="col">Cantidad de Alumnos</th>
+                    <th scope="col">Cantidad de Alumnos Presentes</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -22,11 +21,11 @@
                 {% for clase in clases %} <!-- clases -> object_list -> context_object_name = 'clases' -->
 
                 <tr>
-                    <td>{{clase.pk}}</td>
                     <td>{{clase.fecha}}</td>
                     <td>@mdo</td>
                     <td>
                         <a href="{% url 'clases:editar' clase.pk %}" class="btn btn-primary btn-sm">EDITAR</a>
+                        <a href="{% url 'asistencias:marcar_asistencia' clase.id %}" class="btn btn-success btn-sm">MARCAR ASISTENCIAS</a>
                     </td>
                 </tr>
 
