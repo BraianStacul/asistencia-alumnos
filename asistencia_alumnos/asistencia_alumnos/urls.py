@@ -20,5 +20,6 @@ urlpatterns = [
     # Includes
     path("usuarios/", include('apps.usuarios.urls')),
     path("clases/", include('apps.clases.urls')),
-    path("asistencias/", include('apps.asistencias.urls'))
+    path("asistencias/", include('apps.asistencias.urls')),
+    path("materias/", include('apps.materias.urls'))
 ] 
