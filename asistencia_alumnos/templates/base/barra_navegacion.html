@@ -34,9 +34,9 @@
             
             {% if not user.is_authenticated %}
 
-            <a class="nav-link d-flex align-items-center gap-2"
-                href="{% url 'clases:listar_clases' %}">
-                REGISTRARME
+            <a class="nav-link d-flex align-items-center gap-2" href="{% url 'registrarme' %}">
+                
+                <i class="fa-solid fa-user-plus"></i> REGISTRARME
             </a>
 
             {% endif %}
@@ -44,19 +44,26 @@
         </li>
         <li class="nav-item">
 
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated %}       
 
             <!-- Tercero -->
-            <a class="nav-link d-flex align-items-center gap-2" href="{% url 'registrarme' %}">
+            <!-- <a class="nav-link d-flex align-items-center gap-2" href="{% url 'registrarme' %}">
                 
-                SALIR
-            </a>
+                <i class="fa-solid fa-right-from-bracket"></i> SALIR
+            </a> -->
+
+            <form action="{% url 'cerrar_sesion' %}" method="post">{% csrf_token %}
+
+                <button class="nav-link d-flex align-items-center gap-2 bi" type="submit"
+                style="text-transform: uppercase;">Salir</button>
+
+            </form>
 
             {% else %}
 
             <a class="nav-link d-flex align-items-center gap-2" href="{% url 'iniciar_sesion' %}">
                 
-                INICIAR SESIÓN
+                <i class="fa-solid fa-right-to-bracket"></i> INICIAR SESIÓN
             </a>
 
             {% endif %}
