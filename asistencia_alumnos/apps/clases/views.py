@@ -23,7 +23,7 @@ class ListarClases(ListView):
     model = Clase
     context_object_name = 'clases'
     #Paginación
-    paginate_by = 2
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         ctx = super(ListarClases, self).get_context_data(**kwargs)
@@ -44,3 +44,13 @@ class EditarClase(UpdateView):
     model = Clase
     form_class = ClaseForm
     success_url = reverse_lazy("clases:listar_clases")
+
+class MisClases(ListView):
+    template_name = 'clases/mis_clases.html'
+    model = Clase
+    context_object_name = 'clases'
+    #Paginación
+    paginate_by = 20
+
+    def get_queryset(self):
+        return self.model.objects.all().order_by('-fecha')

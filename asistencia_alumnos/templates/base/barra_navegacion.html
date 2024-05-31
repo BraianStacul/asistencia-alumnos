@@ -1,43 +1,62 @@
 <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
-    <ul class="nav flex-column">
 
-        <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
-                href="{% url 'usuarios:listar_todos' %}">
-                <i class="fa-solid fa-users"></i>
-                LISTA DE USUARIOS
-            </a>
-        </li>
+    {% if user.is_authenticated and user.es_admin %}
+        <ul class="nav flex-column">
 
-        <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2"
-                href="{% url 'clases:listar_clases' %}">
-                <i class="fa-solid fa-graduation-cap"></i>
-                LISTA DE CLASES
-            </a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
+                    href="{% url 'usuarios:listar_todos' %}">
+                    <i class="fa-solid fa-users"></i>
+                    LISTA DE USUARIOS
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2"
-                href="{% url 'materias:listar' %}">
-                <i class="fa-solid fa-book-open-reader"></i>
-                MATERIAS
-            </a>
-        </li>
-    </ul>
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2"
+                    href="{% url 'clases:listar_clases' %}">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    LISTA DE CLASES
+                </a>
+            </li>
 
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2"
+                    href="{% url 'materias:listar' %}">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    MATERIAS
+                </a>
+            </li>
+        </ul>
 
-    <hr class="my-3">
+        <hr class="my-3">
+    {% endif %}
+
+    {% if user.is_authenticated and user.es_alumno %}
+
+        <ul class="nav flex-column">
+
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
+                    href="{% url 'clases:mis_clases' %}">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    MIS CLASES
+                </a>
+            </li>
+        </ul>
+
+        <hr class="my-3">
+    {% endif %}
+    
 
     <ul class="nav flex-column mb-auto">
         <li class="nav-item">
             
             {% if not user.is_authenticated %}
 
-            <a class="nav-link d-flex align-items-center gap-2" href="{% url 'registrarme' %}">
-                
-                <i class="fa-solid fa-user-plus"></i> REGISTRARME
-            </a>
+                <a class="nav-link d-flex align-items-center gap-2" href="{% url 'registrarme' %}">
+                    
+                    <i class="fa-solid fa-user-plus"></i> REGISTRARME
+                </a>
 
             {% endif %}
 
@@ -55,7 +74,7 @@
             <form action="{% url 'cerrar_sesion' %}" method="post">{% csrf_token %}
 
                 <button class="nav-link d-flex align-items-center gap-2 bi" type="submit"
-                style="text-transform: uppercase;">Salir</button>
+                style="text-transform: uppercase;"> ({{user.username}}) Salir</button>
 
             </form>
 

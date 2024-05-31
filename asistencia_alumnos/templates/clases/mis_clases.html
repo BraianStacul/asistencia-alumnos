@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">MIS CLASES</h1>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header">Cantidad de Presentes</div>
+            <div class="card-body">
+                <!-- <h5 class="card-title">{{user.obtener_cantidad_presentes}}</h5> -->
+                <h5 class="card-title">{{user.obtener_presentes|length}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for clase in clases %} <!-- clases -> object_list -> context_object_name = 'clases' -->
+
+                <tr>
+                    <td>{{clase.mostrar_fecha}}</td>
+                    <td>
+                        
+                        {% if clase.id in user.obtener_presentes %}
+                            <span class="badge bg-success">PRESENTE</span>
+                        {% else %}
+                            <span class="badge bg-danger">AUSENTE</span>
+                        {% endif %}
+                        
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+        {% include 'base/paginacion.html' %}
+        
+    </div>
+</div>
+
+{% endblock contenido %}
