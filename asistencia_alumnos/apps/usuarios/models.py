@@ -5,5 +5,9 @@ from django.db import models
 class Usuario(AbstractUser):
     biografia = models.CharField(max_length=255, null=True, blank=True)
 
+    es_profesor = models.BooleanField(default=False)
+    es_alumno = models.BooleanField(default=True)
+    es_admin = models.BooleanField(default=False)
+
     def __str__(self):
         return f"{self.last_name}, {self.first_name} ({self.username})"

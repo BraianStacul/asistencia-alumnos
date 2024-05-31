@@ -11,11 +11,11 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">NOMBRE</th>
+                    <th scope="col">ACCIONES</th>
                     <th scope="col">APELLIDO</th>
+                    <th scope="col">NOMBRE</th>
                     <th scope="col">NOMBRE DE USUARIO</th>
-                    <th scope="col">Acciones</th>
+                    <th>ROLES</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,13 +23,34 @@
                 {% for usuario in usuarios %}
 
                 <tr>
-                    <td>{{usuario.id}}</td>
-                    <td>{{usuario.first_name}}</td>
-                    <td>{{usuario.last_name}}</td>
-                    <td>{{usuario.username}}</td>
                     <td>
                         <a href="" class="btn btn-primary btn-sm disabled">EDITAR</a>
                     </td>
+                    <td>{{usuario.last_name|upper}}</td>
+                    <td>{{usuario.first_name|title}}</td>
+                    <td>{{usuario.username}}</td>
+                    <td>
+
+                        {% if usuario.es_admin %}
+                            <p><i class="fa-regular fa-circle-check" style="color: green;"></i> ES ADMINISTRADOR </p>
+                        {% else %}
+                            <p><i class="fa-regular fa-circle-xmark" style="color: red;"></i> NO ADMINISTRADOR </p>
+                        {% endif %}
+                        
+                        {% if usuario.es_profesor %}
+                            <p><i class="fa-regular fa-circle-check" style="color: green;"></i> ES PROFESOR </p>
+                        {% else %}
+                            <p><i class="fa-regular fa-circle-xmark" style="color: red;"></i> NO ES PROFESOR </p>
+                        {% endif %}
+
+                        {% if usuario.es_alumno %}
+                            <p><i class="fa-regular fa-circle-check"style="color: green;" ></i> ES ALUMNO </p>
+                        {% else %}
+                            <p><i class="fa-regular fa-circle-xmark"style="color: red;" ></i> NO ES ALUMNO </p>
+                        {% endif %}
+                            
+                    </td>
+                    
                 </tr>
 
                 {% empty %}
