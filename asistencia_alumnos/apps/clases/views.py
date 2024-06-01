@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
+
+from apps.utils.mixins import VerificarPermisosMixins
 
 from .forms import ClaseForm
 from .models import Clase
@@ -18,7 +22,7 @@ def listar_clases(request):
     return render(request, template_name, ctx)
 '''
 
-class ListarClases(ListView):
+class ListarClases(LoginRequiredMixin, VerificarPermisosMixins, ListView):
     template_name = 'clases/lista.html'
     model = Clase
     context_object_name = 'clases'
@@ -26,14 +30,19 @@ class ListarClases(ListView):
     paginate_by = 20
 
     def get_context_data(self, **kwargs):
+        print("Estoy en el get_context_data de ListarClases")
         ctx = super(ListarClases, self).get_context_data(**kwargs)
         ctx["icono"] = "o"
         return ctx
     
     def get_queryset(self):
+        print("Estoy en el get_queryset de ListarClases")
         return self.model.objects.all().order_by('-fecha')
+    
 
-class CrearClase(CreateView):
+
+
+class CrearClase(LoginRequiredMixin, VerificarPermisosMixins, CreateView):
     template_name = "clases/crear.html"
     model = Clase
     form_class = ClaseForm
