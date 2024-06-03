@@ -1,16 +1,29 @@
 {% extends 'base/base.html' %}
 
+{% load static %}
+
 {% block contenido %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">LISTA DE MATERIAS</h1>
 </div>
 
+<div class="row mb-3">
+    <div class="col">
+        <form method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control" name="buscador" placeholder="Ingrese el nombre de la materia para buscar..." value="{{buscador}}">
+                <button type="submit" class="btn btn-outline-secondary" type="button">Buscar</button>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="row">
     <div class="col">
         <a href="{% url 'materias:nuevo' %}" type="button" class="btn btn-primary">Nueva materia</a>
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th scope="col">Logo</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Categorias</th>
                     <th scope="col">Acciones</th>
@@ -21,6 +34,17 @@
                 {% for materia in materias %} <!-- clases -> object_list -> context_object_name = 'clases' -->
 
                 <tr>
+                    <td>
+                        
+                        
+                        {% if materia.logo %}
+                            <img height="25px" src="{{materia.logo.url}}">
+                        {% else %}
+                            <img height="25px" src="{% static 'images/defaults/materia.png' %}">
+                        {% endif %}
+                            
+                        
+                    </td>
                     <td>{{materia.nombre}}</td>
                     <td>
                         <!-- 

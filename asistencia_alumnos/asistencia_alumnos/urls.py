@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.contrib.auth import views as views_django
 from django.urls import path, include
 
+from django.conf import settings
+from django.conf.urls.static import static
 # from .views import login, home
 from . import views
 
@@ -23,4 +25,4 @@ urlpatterns = [
     path("clases/", include('apps.clases.urls')),
     path("asistencias/", include('apps.asistencias.urls')),
     path("materias/", include('apps.materias.urls'))
-] 
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

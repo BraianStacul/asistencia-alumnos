@@ -16,10 +16,22 @@ class Listar(ListView):
     paginate_by = 20
     
     def get_queryset(self):
-        return self.model.objects.all().order_by('nombre')
+        buscador = self.request.GET.get("buscador","")
+        query = self.model.objects.all().order_by('nombre')
+        if buscador:
+            query = query.filter(nombre__icontains=buscador)
+        print("El usuario quiere buscar: ", buscador)
+
+        return query
+    
+    def get_context_data(self, **kwargs):
+        ctx = super(Listar, self).get_context_data(**kwargs)
+        ctx["buscador"] = self.request.GET.get("buscador","")
+
+        return ctx
 
 class Nuevo(LoginRequiredMixin, CreateView):
     template_name = "materias/crear.html"
     model = Materia
     form_class = MateriaForm
-    success_url = reverse_lazy("materias:lista")
+    success_url = reverse_lazy("materias:listar")

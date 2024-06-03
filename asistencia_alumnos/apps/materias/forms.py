@@ -11,4 +11,4 @@ class MateriaForm(forms.ModelForm):
 
     class Meta:
         model = Materia
-        fields = ["nombre", "categoria"]
+        fields = ["nombre", "categoria", "logo"]
