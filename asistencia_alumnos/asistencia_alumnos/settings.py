@@ -32,7 +32,8 @@ INSTALLED_APPS = [
     'apps.usuarios',
     'apps.clases',
     'apps.asistencias',
-    'apps.materias'
+    'apps.materias',
+    'django_filters'
 ]
 
 AUTH_USER_MODEL = "usuarios.Usuario"
